@@ -1,0 +1,4 @@
+[submodule "samples/UWP/UWP-Workshop-HackOHIO"]
+	path = samples/UWP/UWP-Workshop-HackOHIO
+	url = https://github.com/zateutsch/UWP-Workshop-HackOHIO.git
+	branch = master
