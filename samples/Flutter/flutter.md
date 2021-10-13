@@ -28,7 +28,7 @@ Next is Visual Studio 2019. If you don't have a professional license for Visual 
 
 After installing Visual Studio 2019, open the Visual Studio Installer, where we will choose a dependency that needs to be present within VS. If you are having trouble finding it, just press the *Windows* they, then type "**Visual Studio Installer**". With the installer opened, click on *Modify* and make sure that the "**Desktop development with C++**" workload is selected. If it isn't, just select it and click on Modify on the lower right corner of the installer. This will ensure you have everything required to build your Flutter Windows Application. Just as some background, whenever you build your project, the Flutter commands will generate a native project to whichever platform that you are building for, and in the Windows case, it generates a native C++ Win32 application project, that uses Visual Studio 2019 to build your final executable.
 
-Now, lets install the Visual Studio Code Flutter extension. Open Visual Studio Code, then in the extensions tab (you can use the *Ctrl+Shift+X* shortcut to open it) search for "**Flutter**". When you find it, select it on the list, and click on "**Install**".
+Now, lets install the Visual Studio Code Flutter extension. Open Visual Studio Code, then in the extensions tab (you can use the *Ctrl+Shift+X* shortcut to open it) search for "**Flutter**". When you find it, select it on the list, and click "**Install**".
 
 The only missing thing is to actually install Flutter. You can either download the zip file, or use git to clone from the source. Both options work exactly the same, so it is up to you to decide what you want to do. Follow Flutter's installation page to choose your installation method:
 
