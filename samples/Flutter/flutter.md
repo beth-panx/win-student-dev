@@ -7,7 +7,7 @@ You can follow the official documentation [here](https://flutter.dev/docs/get-st
 
 ## Installing Flutter
 
-In order to build your Windows app for Flutter, you need to have a few things installed on your system.
+In order to build your Flutter app for Windows, you need to have a few things installed on your system.
 To install these dependencies, we recommend using winget. Winget requires Windows 10, version 1809 (10.0.17763), or later. Lets start by going to the winget website:
 
 https://github.com/microsoft/winget-cli/releases
