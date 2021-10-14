@@ -24,7 +24,7 @@ That is all that is needed to install VS Code. Easy, right? You also need a few 
 
 Next is Visual Studio 2019. If you don't have a professional license for Visual Studio 2019, then you can simply use the Community edition:
 
-```winget install -e --id Microsoft.VisualStudio.Community```
+```winget install -e --id Microsoft.VisualStudio.2019.Community```
 
 After installing Visual Studio 2019, open the Visual Studio Installer, where we will choose a dependency that needs to be present within VS. If you are having trouble finding it, just press the *Windows* they, then type "**Visual Studio Installer**". With the installer opened, click on *Modify* and make sure that the "**Desktop development with C++**" workload is selected. If it isn't, just select it and click on Modify on the lower right corner of the installer. This will ensure you have everything required to build your Flutter Windows Application. Just as some background, whenever you build your project, the Flutter commands will generate a native project to whichever platform that you are building for, and in the Windows case, it generates a native C++ Win32 application project, that uses Visual Studio 2019 to build your final executable.
 
