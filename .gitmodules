@@ -2,3 +2,6 @@
 	path = samples/UWP/UWP-Workshop-HackOHIO
 	url = https://github.com/zateutsch/UWP-Workshop-HackOHIO.git
 	branch = master
+[submodule "samples/PWA/web-whiteboard"]
+	path = samples/PWA/web-whiteboard
+	url = https://github.com/pwa-builder/web-whiteboard.git
