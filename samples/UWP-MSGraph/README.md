@@ -50,7 +50,7 @@ In order for authentication and login to work in your app, we must first create 
 Follow this walk-through to setup a new app registration in Azure Active Directory - [Quickstart: Register an application with the Microsoft identity platform](
 https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app)
 
-[](./images/azureappregistration.png)
+![](./images/azureappregistration.png)
 
 Give your app registration a name that can be displayed in an authorization prompt. This is so users know what app is requesting access to their Graph data when granting consent.
 
@@ -70,15 +70,15 @@ To create a new UWP app, let's start by using the **Create a new project** optio
 2. Give your project a name and location, such as: `C:\Git\UwpGraphQuickstartSample`
 3. Click the **Create** button to complete the wizard and create your new UWP application.
 
-[](./images/vsappcreation.png)]
+![](./images/vsappcreation.png)
 
-Visit [Create a "Hello, World!" app (XAML)]https://docs.microsoft.com/en-us/windows/uwp/get-started/create-a-hello-world-app-xaml-universal) for a more in-depth walk-through of how to create a new UWP project for the first time.
+Visit [Create a "Hello, World!" app (XAML)](https://docs.microsoft.com/en-us/windows/uwp/get-started/create-a-hello-world-app-xaml-universal) for a more in-depth walk-through of how to create a new UWP project for the first time.
 
 ## 3. Add nuget packages from the Windows Community Toolkit
 
 With your UWP project open in Visual Studio, find the **Project** menu item. Select **Manage NuGet Packages...**
 
-[](./images/nugetpackagemenuitem.png)
+![](./images/nugetpackagemenuitem.png)
 
 Navigate to the **Browse** tab if you are not already there by default.
 
@@ -87,7 +87,7 @@ Use the search input field to lookup and install the latest versions of the foll
 - `CommunityToolkit.Authentication.Msal`
 - `CommunityToolkit.Graph.Uwp`
 
-[](./images/nugetpackagemanager.png)
+![](./images/nugetpackagemanager.png)
 
 ## 4. Setup a global authentication provider
 
@@ -205,6 +205,6 @@ namespace UwpGraphQuickstartSample
 
 Press F5 to launch the application and use the login button to choose a local account to sign in with. Once signed in, observe the user's display name is displayed in the text block. That's it!
 
-Hopefully this simple guide will help you hit the ground running with calling Graph APIs in your UWP applications! We can't wait to see what you build with them 🚀
+Hopefully this simple guide will help you hit the ground running with calling Graph APIs in your UWP applications. We can't wait to see what you build with them 🚀
 
-[](./images/runtheapp.png)
+![](./images/runtheapp.png)
