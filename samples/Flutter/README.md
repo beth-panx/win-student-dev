@@ -1,7 +1,6 @@
 # Build an awesome Flutter app for Windows
 
 Link to video: https://aka.ms/win-dev/student/osu/flutter/get-started-video
-Link to blog: https://aka.ms/win-dev/student/osu/flutter/get-started-blog
 
 You can follow the official documentation [here](https://flutter.dev/docs/get-started/install/windows) but we will provide all the steps required to prepare your development environment to build Flutter apps for Windows.
 
