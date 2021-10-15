@@ -10,6 +10,19 @@ namespace UwpGraphQuickstartSample
         public App()
         {
             InitializeComponent();
+
+            ConfigureGlobalAuthProvider();
+        }
+
+        private void ConfigureGlobalAuthProvider()
+        {
+            if (ProviderManager.Instance.GlobalProvider == null)
+            {
+                var clientId = "YOUR-CLIENT-ID-HERE";
+                var scopes = new string[] { "User.Read" };
+
+                ProviderManager.Instance.GlobalProvider = new MsalProvider(clientId, scopes); ;
+            }
         }
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
@@ -29,19 +42,6 @@ namespace UwpGraphQuickstartSample
                 }
 
                 Window.Current.Activate();
-
-                ConfigureGlobalAuthProvider();
-            }
-        }
-
-        private void ConfigureGlobalAuthProvider()
-        {
-            if (ProviderManager.Instance.GlobalProvider == null)
-            {
-                var clientId = "YOUR-CLIENT-ID-HERE";
-                var scopes = new string[] { "User.Read" };
-
-                ProviderManager.Instance.GlobalProvider = new MsalProvider(clientId, scopes); ;
             }
         }
     }

@@ -2,9 +2,21 @@
 
 Hello and welcome! In this getting-started guide you will learn how to add contextual user data and intelligence from the Microsoft Graph service into a modern UWP application.
 
-## What is UWP?
+## What is UWP
+
+UWP is one of many ways to create client applications for Windows. UWP apps use WinRT APIs to provide powerful UI and advanced asynchronous features that are ideal for internet-connected devices.
+
+To download the tools you need to start creating UWP apps, see [Get set up](https://docs.microsoft.com/en-us/windows/apps/windows-app-sdk/set-up-your-development-environment), and then [write your first app](https://docs.microsoft.com/en-us/windows/uwp/get-started/your-first-app).
+
+The Microsoft development story continues to evolve, and along with initiatives such as [WinUI](https://docs.microsoft.com/en-us/windows/apps/winui/), [MSIX](https://docs.microsoft.com/en-us/windows/msix/overview), and [Windows App SDK](https://github.com/microsoft/WindowsAppSDK), UWP is a powerful tool for creating client apps.
+
+For more details, visit [What's a Universal Windows Platform (UWP) app?](https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide)
 
 ## What is Microsoft Graph?
+
+Microsoft Graph is the gateway to data and intelligence in Microsoft 365. It provides a unified programmability model that you can use to access the tremendous amount of data in Microsoft 365 and Windows 10/11. Use the wealth of data in Microsoft Graph to build consistent and contextual experiences that interact with millions of users.
+
+For more details, visit [Overview of Microsoft Graph](https://docs.microsoft.com/en-us/graph/overview)
 
 ## Overview
 
@@ -17,6 +29,8 @@ In this guide we'll walk through:
 5. Adding a Graph-powered control to enable login.
 6. Making an ad-hoc call to any Microsoft Graph API.
 
+By the end, you'll have a UWP application that enables a user to login and see their user display name from Microsoft Graph.
+
 ## What you'll need
 
 To complete this guide you'll need the following:
@@ -27,7 +41,7 @@ To complete this guide you'll need the following:
 
 Now fire up Visual Studio and let's get started! 🚀
 
-## Create an app registration to enable user authentication
+## 1. Create an app registration to enable user authentication
 
 In order for authentication and login to work in your app, we must first create a relationship between your application and Microsoft identity services. This is a security step that prevents unknown applications from querying user data.
 
@@ -42,19 +56,19 @@ When selecting a sign in audience, consider using **Accounts in any organization
 
 When you've completed creating and configuring the app registration, record the **Client ID** value to use in the application later on.
 
-## Create a new UWP project or BYO
+## 2. Create a new UWP project or BYO
 
-You'll need a UWP application as a baseline. If you already have a UWP project setup and ready to infuse with user insights from Microsoft Graph, please continue to the next step.
+You'll need a UWP application as a baseline. If you already have a UWP project setup and ready to infuse with user insights from Microsoft Graph, please continue to the [next step](#add-nuget-packages-from-the-windows-community-toolkit).
 
 To create a new UWP app, let's start by using the **Create a new project** option:
 
 1. Find the project template, **Blank App (Universal Windows)**
-2. Give your project a name and location. I chose: `C:\Git\UwpGraphQuickstartSample`
+2. Give your project a name and location, such as: `C:\Git\UwpGraphQuickstartSample`
 3. Click the **Create** button to complete the wizard and create your new UWP application.
 
 > IMAGE - of VS app creation screen
 
-## Add nuget packages from the Windows Community Toolkit
+## 3. Add nuget packages from the Windows Community Toolkit
 
 With your UWP project open in Visual Studio, find the **Project** menu item. Select **Manage NuGet Packages...**
 
@@ -69,33 +83,56 @@ Use the search input field to lookup and install the latest versions of the foll
 
 > IMAGE - of the installed nuget packages in the packman
 
-## Setup a global authentication provider
+## 4. Setup a global authentication provider
 
-To start making Graph API calls, we must first authenticate the user and get authorization to request their data from Microsoft Graph. Start in the app startup logic, `App.xaml.cs`
+To start making Graph API calls, we must first authenticate the user and get authorization to request their data from Microsoft Graph by [Initializing the GlobalProvider](https://docs.microsoft.com/en-us/windows/communitytoolkit/graph/authentication/overview#initializing-the-globalprovider).
+
+Add this method to your app startup logic in `App.xaml.cs` to configure the global authentication provider.
+
+Replace the `clientId` string `YOUR-CLIENT-ID-HERE` with the value retrieved in [step one](#create-an-app-registration-to-enable-user-authentication).
+
+### App.xaml.cs
 
 ```
 using CommunityToolkit.Authentication;
+using Windows.ApplicationModel.Activation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
-// Set the global auth provider when launching/activating the application.
-private void ConfigureGlobalAuthProvider()
+namespace UwpGraphQuickstartSample
 {
-    if (ProviderManager.Instance.GlobalProvider == null)
+    sealed partial class App : Application
     {
-        var clientId = "YOUR-CLIENT-ID-HERE";
-        var scopes = new string[] { "User.Read" };
+        public App()
+        {
+            InitializeComponent();
 
-        ProviderManager.Instance.GlobalProvider = new MsalProvider(clientId, scopes); ;
+            ConfigureGlobalAuthProvider();
+        }
+
+        private void ConfigureGlobalAuthProvider()
+        {
+            if (ProviderManager.Instance.GlobalProvider == null)
+            {
+                var clientId = "YOUR-CLIENT-ID-HERE";
+                var scopes = new string[] { "User.Read" };
+
+                ProviderManager.Instance.GlobalProvider = new MsalProvider(clientId, scopes); ;
+            }
+        }
+
+        protected override void OnLaunched(LaunchActivatedEventArgs e) { ... }
     }
 }
 ```
 
-## Enable user login with the LoginButton control
+## 5. Enable user login with the LoginButton control
 
-To trigger the login flow for users, we will next add a `LoginButton` control. This button will call sign in/out on the global auth provider when invoked by the user. It is also aware of the global provider state and will react and automatically update representation and function accordingly.
+To trigger the login flow for users, we will next add a [LoginButton control](https://docs.microsoft.com/en-us/windows/communitytoolkit/graph/controls/loginbutton). Open up the page where you want to put your login button, such as `MainPage.xaml`, and add a new `LoginButton` control as well as a `TextBlock`. A user can invoke the `LoginButton` to trigger sign in or out from their Microsoft account using the current global authentication provider. The button is also aware of the global provider state and will automatically update representation and function whenever the provider state changes. We'll use the `TextBlock` in the [next step](#make-an-ad-hoc-request-to-a-microsoft-graph-api).
 
-Open up the page where you want to put your login button, such as `MainPage.xaml`
+### MainPage.xaml
 
-```
+```xml
 <Page
     x:Class="UwpGraphQuickstartSample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -113,38 +150,46 @@ Open up the page where you want to put your login button, such as `MainPage.xaml
 </Page>
 ```
 
-## Make an ad-hoc request to a Microsoft Graph API
+## 6. Make an ad-hoc request to a Microsoft Graph API
 
-Now that our user can login, we can request access to data from Microsoft Graph APIs. Make sure to check the state of the current global auth provider and see if a user is signed in before making Graph requests. Otherwise any calls to Graph will not be authenticated and return a status code 401, **Forbidden**!
+Now that our user can login, we can request access to data from Microsoft Graph APIs. Make sure to check the state of the current global authentication provider and see if a user is signed in before making Graph requests.
+Otherwise any calls to Graph will not be authenticated and return a status code 401, **Forbidden**!
+
+Add the following code to show/hide the current user's display name in response to changes in the global authentication state.
+
+### MainPage.xaml.cs
 
 ```
 using CommunityToolkit.Authentication;
 using CommunityToolkit.Graph.Extensions;
 using Windows.UI.Xaml.Controls;
 
-public sealed partial class MainPage : Page
+namespace UwpGraphQuickstartSample
 {
-    public MainPage()
+    public sealed partial class MainPage : Page
     {
-        this.InitializeComponent();
-
-        ProviderManager.Instance.ProviderStateChanged += OnProviderStateChanged;
-    }
-
-    private async void OnProviderStateChanged(object sender, ProviderStateChangedEventArgs e)
-    {
-        if (e.NewState == ProviderState.SignedIn)
+        public MainPage()
         {
-            SignedInUserTextBlock.Text = "Signed in as...";
+            this.InitializeComponent();
 
-            var graphClient = ProviderManager.Instance.GlobalProvider.GetClient();
-            var me = await graphClient.Me.Request().GetAsync();
-
-            SignedInUserTextBlock.Text = "Signed in as: " + me.DisplayName;
+            ProviderManager.Instance.ProviderStateChanged += OnProviderStateChanged;
         }
-        else
+
+        private async void OnProviderStateChanged(object sender, ProviderStateChangedEventArgs e)
         {
-            SignedInUserTextBlock.Text = "Please sign in.";
+            if (e.NewState == ProviderState.SignedIn)
+            {
+                SignedInUserTextBlock.Text = "Signed in as...";
+
+                var graphClient = ProviderManager.Instance.GlobalProvider.GetClient();
+                var me = await graphClient.Me.Request().GetAsync();
+
+                SignedInUserTextBlock.Text = "Signed in as: " + me.DisplayName;
+            }
+            else
+            {
+                SignedInUserTextBlock.Text = "Please sign in.";
+            }
         }
     }
 }
@@ -152,4 +197,6 @@ public sealed partial class MainPage : Page
 
 ## Running the application
 
-## Now what?
+Press F5 to launch the application and use the login button to choose a local account to sign in with. Once signed in, observe the user's display name is displayed in the text block. That's it!
+
+Hopefully this simple guide will help you hit the ground running with calling Graph APIs in your UWP applications! We can't wait to see what you build with them 🚀

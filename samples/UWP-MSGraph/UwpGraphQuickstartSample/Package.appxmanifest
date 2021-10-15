@@ -8,7 +8,7 @@
 
   <Identity
     Name="UwpGraphQuickstartSample"
-    Publisher="CN=shane"
+    Publisher="CN=Microsoft"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="41fadf78-e05d-4d3f-8496-cbcf436943b2" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
