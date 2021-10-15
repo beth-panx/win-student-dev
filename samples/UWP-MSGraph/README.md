@@ -11,11 +11,11 @@ Hello and welcome! In this getting-started guide you will learn how to add conte
 In this guide we'll walk through:
 
 1. Enabling user authentication by setting up an app registration in Azure.
-2. Adding the Authentication and Graph nuget packages from the Windows Community Toolkit.
-3. Creating a new UWP project in Visual Studio (or bring your own).
-4. Setting up the global authentication provider.
-5. Adding a Graph-powered control to enable login.
-6. Making an ad-hoc call to any Microsoft Graph API.
+1. Creating a new UWP project in Visual Studio (or bring your own).
+1. Adding the Authentication and Graph nuget packages from the Windows Community Toolkit.
+1. Setting up the global authentication provider.
+1. Adding a Graph-powered control to enable login.
+1. Making an ad-hoc call to a Microsoft Graph API.
 
 ## What you'll need
 
