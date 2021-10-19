@@ -1,0 +1,102 @@
+﻿<Page
+    x:Class="MyFirstToolkit.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyFirstToolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+  <!-- This sample is from the Toolkit sample app available from https://aka.ms/windowstoolkitapp -->
+  <controls:ListDetailsView BackButtonBehavior="Automatic"
+                            ItemsSource="{x:Bind Emails}"
+                            NoSelectionContent="Select an item to view"
+                            CompactModeThresholdWidth="720">
+    <!-- Template for the item on the List side of the control. -->
+    <controls:ListDetailsView.ItemTemplate>
+      <DataTemplate x:DataType="local:Email">
+        <StackPanel Margin="0,8">
+          <TextBlock Text="{x:Bind From}"
+                     Style="{StaticResource SubtitleTextBlockStyle}"/>
+          <TextBlock Text="{x:Bind Subject}"
+                     Style="{StaticResource BodyTextBlockStyle}"
+                     Foreground="{ThemeResource SystemAccentColor}"
+                     MaxLines="1"/>
+          <TextBlock Text="{x:Bind Body}"
+                     Style="{StaticResource BodyTextBlockStyle}"
+                     Opacity=".6"
+                     MaxLines="1"/>
+        </StackPanel>
+      </DataTemplate>
+    </controls:ListDetailsView.ItemTemplate>
+    <!-- Template for the expanded details of an item on the Details side when clicked. -->
+    <controls:ListDetailsView.DetailsTemplate>
+      <DataTemplate x:DataType="local:Email">
+        <RelativePanel Margin="24">
+          <Ellipse x:Name="FromEllipse"
+                   Fill="{ThemeResource SystemAccentColor}"
+                   Width="50"
+                   Height="50"/>
+          <TextBlock Text="{x:Bind From}"
+                     Style="{StaticResource SubtitleTextBlockStyle}"
+                     RelativePanel.RightOf="FromEllipse"
+                     Margin="12,-6,0,0"/>
+          <TextBlock x:Name="SubjectLine"
+                     Text="{x:Bind Subject}"
+                     Style="{StaticResource BodyTextBlockStyle}"
+                     RelativePanel.Below="FromEllipse"
+                     Margin="0,12,0,0"/>
+          <TextBlock x:Name="BodyContent"
+                     Text="{x:Bind Body}"
+                     Style="{StaticResource BodyTextBlockStyle}"
+                     TextWrapping="Wrap"
+                     RelativePanel.Below="SubjectLine"
+                     Margin="0,12,0,0"/>
+        </RelativePanel>
+      </DataTemplate>
+    </controls:ListDetailsView.DetailsTemplate>
+    <!-- Template for when no item is selected -->
+    <controls:ListDetailsView.NoSelectionContentTemplate>
+      <DataTemplate>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+          <SymbolIcon Symbol="Mail"
+                      RenderTransformOrigin=".5,.5">
+            <SymbolIcon.RenderTransform>
+              <CompositeTransform
+                                  ScaleX="2"
+                                  ScaleY="2"/>
+            </SymbolIcon.RenderTransform>
+          </SymbolIcon>
+          <TextBlock Text="{Binding}"
+                     FontSize="24"
+                     Margin="0,12"/>
+        </StackPanel>
+      </DataTemplate>
+    </controls:ListDetailsView.NoSelectionContentTemplate>
+    <!-- CommandBar on the bottom of the List side -->
+    <controls:ListDetailsView.ListCommandBar>
+      <CommandBar>
+        <!-- TODO: Button functionality -->
+        <AppBarButton Icon="Back" Label="Back"/>
+        <AppBarButton Icon="Forward" Label="Forward"/>
+        <CommandBar.Content>
+          <TextBlock Margin="12,14">
+            <Run Text="{x:Bind Emails.Count, Mode=OneWay}" />
+            <Run Text="Items" />
+          </TextBlock>
+        </CommandBar.Content>
+      </CommandBar>
+    </controls:ListDetailsView.ListCommandBar>
+    <!-- CommandBar on the bottom of the Details side -->
+    <controls:ListDetailsView.DetailsCommandBar>
+      <CommandBar>
+        <AppBarButton Icon="MailReply" Label="Reply" />
+        <AppBarButton Icon="MailReplyAll" Label="Reply All" />
+        <AppBarButton Icon="MailForward" Label="Forward" />
+      </CommandBar>
+    </controls:ListDetailsView.DetailsCommandBar>
+  </controls:ListDetailsView>
+</Page>
