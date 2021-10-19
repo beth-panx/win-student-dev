@@ -7,5 +7,5 @@ The repo includes:
 - High-level overview of final Sounboard example project.
 
 ## Other Links:
--[Recorded UWP Workshop Video](https://aka.ms/win-dev/student/osu/uwp/work-shop-video)
--[Building Your First UWP App Blog Post]()
+- [Recorded UWP Workshop Video](https://aka.ms/win-dev/student/osu/uwp/work-shop-video)
+- [Building Your First UWP App Blog Post]()
