@@ -7,8 +7,8 @@
     <ProjectGuid>{E99D1A06-2477-4A98-A227-3485C79F25F3}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectBangaloreNugetTest</RootNamespace>
-    <AssemblyName>ProjectBangaloreNugetTest</AssemblyName>
+    <RootNamespace>ImageClassificationTest</RootNamespace>
+    <AssemblyName>ImageClassificationTest</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
