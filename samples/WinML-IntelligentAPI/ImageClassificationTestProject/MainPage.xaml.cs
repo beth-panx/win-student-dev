@@ -48,12 +48,17 @@ namespace ImageClassificationTest
 
 
             //Call ClassifyImage to get image classes
-            List<ClassificationResult> list = await SqueezeNetImageClassifier.ClassifyImage(selectedStorageFile, 3);
-
-            //Display Image and result
-            ResultsBlock.Text = "1st guess: " + list[0].category + "\nwith confidence: " + list[0].confidence + " \n\n\n2nd guess: " + list[1].category + "\nwith confidence: " + list[1].confidence + " \n\n\n3rd guess: " + list[2].category + "\nwith confidence: " + list[2].confidence;
-            await DisplayImage(selectedStorageFile);
-
+            if (selectedStorageFile != null)
+            {
+                List<ClassificationResult> list = await SqueezeNetImageClassifier.ClassifyImage(selectedStorageFile, 3);
+                //Display Image and result
+                ResultsBlock.Text = "1st guess: " + list[0].category + "\nwith confidence: " + list[0].confidence + " \n\n\n2nd guess: " + list[1].category + "\nwith confidence: " + list[1].confidence + " \n\n\n3rd guess: " + list[2].category + "\nwith confidence: " + list[2].confidence;
+                await DisplayImage(selectedStorageFile);
+            }
+            else
+            {
+                ResultsBlock.Text = "Select a file";
+            }
         }
 
         private async Task DisplayImage(StorageFile selectedStorageFile)
